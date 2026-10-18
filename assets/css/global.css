@@ -87,16 +87,9 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   font-size: 24px;
   line-height: 1;
   text-decoration: none;
-}
-
-.brand__mark {
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
 }
 
 .site-nav {
