@@ -1,0 +1,45 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.Title }}</title>
+    <link>{{ site.Home.Permalink }}</link>
+    <description>{{ site.Params.description }}</description>
+    <language>{{ site.Language.Locale | default "zh-CN" }}</language>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- with .OutputFormats.Get "RSS" }}
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- end }}
+    {{- $baseURL := urls.Parse site.BaseURL -}}
+    {{- $origin := printf "%s://%s" $baseURL.Scheme $baseURL.Host -}}
+    {{- range first 20 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    {{- $post := . -}}
+    {{- $content := .Content -}}
+    {{- if eq .Params.kind "photo" -}}
+      {{- range .Params.photos -}}
+        {{- $photo := . -}}
+        {{- with $post.Resources.GetMatch $photo.src -}}
+          {{- $img := . -}}
+          {{- $resized := $img.Resize "960x q82 webp" -}}
+          {{- $caption := "" -}}
+          {{- with $photo.caption -}}
+            {{- $caption = printf "<figcaption>%s</figcaption>" (htmlEscape .) -}}
+          {{- end -}}
+          {{- $content = printf "%s<figure><img src=\"%s\" alt=\"%s\" width=\"%d\" height=\"%d\">%s</figure>" $content $resized.RelPermalink (htmlEscape $photo.alt) $resized.Width $resized.Height $caption -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $content = $content | replaceRE `(href|src)="/` (printf `$1="%s/` $origin) -}}
+    {{- $content = $content | replaceRE `, /` (printf `, %s/` $origin) -}}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <guid>{{ .Permalink }}</guid>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <description>{{ $content | transform.XMLEscape | safeHTML }}</description>
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
+    </item>
+    {{- end }}
+  </channel>
+</rss>

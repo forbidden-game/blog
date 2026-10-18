@@ -1,0 +1,30 @@
+{{- $img := .image -}}
+{{- if not $img -}}
+  {{- errorf "image-data: missing image resource" -}}
+{{- end -}}
+
+{{- $widths := .widths | default (slice 480 960 1600) -}}
+{{- $srcset := slice -}}
+{{- range $widths -}}
+  {{- if le . $img.Width -}}
+    {{- $resized := $img.Resize (printf "%dx q82 webp" .) -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq (len $srcset) 0 -}}
+  {{- $srcset = $srcset | append (printf "%s %dw" $img.RelPermalink $img.Width) -}}
+{{- end -}}
+
+{{- $fallbackWidth := .fallbackWidth | default 960 -}}
+{{- if lt $img.Width $fallbackWidth -}}
+  {{- $fallbackWidth = $img.Width -}}
+{{- end -}}
+{{- $fallback := $img.Resize (printf "%dx q86 jpg" $fallbackWidth) -}}
+
+{{- return (dict
+      "srcset" (delimit $srcset ", ")
+      "fallback" $fallback
+      "full" $img
+      "width" $fallback.Width
+      "height" $fallback.Height) -}}

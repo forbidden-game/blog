@@ -1,0 +1,34 @@
+{{- $src := .Get "src" -}}
+{{- $img := .Page.Resources.GetMatch $src -}}
+{{- if not $img -}}
+  {{- errorf "figure: image %q not found in %s" $src .Page.RelPermalink -}}
+{{- else -}}
+  {{- $alt := .Get "alt" | default $img.Title | default "Image" -}}
+  {{- if not (.Get "alt") -}}
+    {{- errorf "figure: alt text required for %q in %s" $src .Page.RelPermalink -}}
+  {{- end -}}
+  {{- $caption := .Get "caption" -}}
+  {{- $loading := .Get "loading" | default "lazy" -}}
+  {{- $class := .Get "class" -}}
+  {{- $sizes := .Get "sizes" -}}
+  {{- if not $sizes -}}
+    {{- if eq $class "wide" -}}
+      {{- $sizes = "(max-width: 1200px) 100vw, 960px" -}}
+    {{- else if eq $class "bleed" -}}
+      {{- $sizes = "100vw" -}}
+    {{- else -}}
+      {{- $sizes = "(max-width: 768px) 100vw, 768px" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $data := partial "image-data.html" (dict "image" $img) -}}
+
+  <figure class="figure{{ with $class }} {{ . }}{{ end }}">
+    <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
+      <picture>
+        <source type="image/webp" srcset="{{ $data.srcset }}" sizes="{{ $sizes }}">
+        <img src="{{ $data.fallback.RelPermalink }}" width="{{ $data.width }}" height="{{ $data.height }}" alt="{{ $alt }}" loading="{{ $loading }}" decoding="async">
+      </picture>
+    </a>
+    {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+{{- end -}}

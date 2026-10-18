@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+
+<section class="hero">
+  <p class="eyebrow">{{ site.Params.tagline }} / {{ now.Year }}</p>
+  <h1>{{ site.Title }}</h1>
+  <p class="hero__lede">{{ site.Params.description }}</p>
+  <p class="hero__meta">A personal blog about photographs, text, and the space between them.</p>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <h2>Latest</h2>
+    <a href="{{ "posts/" | relURL }}">All posts →</a>
+  </div>
+  {{ partial "post-list.html" (first 5 $posts) }}
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <h2>Photos</h2>
+    <a href="{{ "photos/" | relURL }}">Photo index →</a>
+  </div>
+  <div class="home-photos">
+    {{- $count := 0 -}}
+    {{- range $post := $posts -}}
+      {{- range $post.Params.photos -}}
+        {{- if lt $count 6 -}}
+          {{ partial "contact-item.html" (dict "page" $post "photo" .) }}
+          {{- $count = add $count 1 -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+</section>
+{{ end }}

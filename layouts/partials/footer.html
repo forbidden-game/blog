@@ -1,0 +1,11 @@
+<footer class="site-footer">
+  <div>
+    <div>© {{ now.Year }} {{ site.Params.author }}</div>
+    <div>{{ site.Params.footerNote }}</div>
+  </div>
+  <nav aria-label="页脚">
+    <a href="{{ "rss.xml" | relURL }}">RSS</a>
+    <a href="{{ "tags/" | relURL }}">Tags</a>
+    <a href="{{ "about/" | relURL }}">About</a>
+  </nav>
+</footer>

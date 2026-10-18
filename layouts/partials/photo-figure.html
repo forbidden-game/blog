@@ -1,0 +1,26 @@
+{{- $page := .page -}}
+{{- $photo := .photo -}}
+{{- $img := $page.Resources.GetMatch $photo.src -}}
+{{- if not $img -}}
+  {{- errorf "photo: image %q not found in %s" $photo.src $page.RelPermalink -}}
+{{- else -}}
+  {{- $alt := $photo.alt | default "Untitled image" -}}
+  {{- if not $photo.alt -}}
+    {{- errorf "photo: alt text required for %q in %s" $photo.src $page.RelPermalink -}}
+  {{- end -}}
+  {{- $caption := $photo.caption -}}
+  {{- $sizes := .sizes | default "(max-width: 768px) 100vw, 768px" -}}
+  {{- $widths := .widths | default (slice 480 960 1600) -}}
+  {{- $class := .class | default "photo" -}}
+  {{- $data := partial "image-data.html" (dict "image" $img "widths" $widths) -}}
+
+  <figure class="{{ $class }}">
+    <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
+      <picture>
+        <source type="image/webp" srcset="{{ $data.srcset }}" sizes="{{ $sizes }}">
+        <img src="{{ $data.fallback.RelPermalink }}" width="{{ $data.width }}" height="{{ $data.height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+      </picture>
+    </a>
+    {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+{{- end -}}

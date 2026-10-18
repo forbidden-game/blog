@@ -1,0 +1,9 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Tag</p>
+  <h1>#{{ .Title }}</h1>
+  <p>{{ len .Pages }} posts</p>
+</header>
+
+{{ partial "post-list.html" .Pages.ByDate.Reverse }}
+{{ end }}

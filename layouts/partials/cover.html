@@ -1,0 +1,25 @@
+{{- $img := .image -}}
+{{- $alt := .alt -}}
+{{- $caption := .caption -}}
+{{- if not $img -}}
+  {{- errorf "cover: image missing for %s" .page.RelPermalink -}}
+{{- else -}}
+  {{- if not $alt -}}
+    {{- errorf "cover: coverAlt is required for %s" .page.RelPermalink -}}
+    {{- $alt = "Cover image" -}}
+  {{- end -}}
+  {{- $data := partial "image-data.html" (dict
+        "image" $img
+        "widths" (slice 768 1200 1600 2000)
+        "fallbackWidth" 1600) -}}
+
+  <figure class="post-cover">
+    <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
+      <picture>
+        <source type="image/webp" srcset="{{ $data.srcset }}" sizes="100vw">
+        <img src="{{ $data.fallback.RelPermalink }}" width="{{ $data.width }}" height="{{ $data.height }}" alt="{{ $alt }}" loading="eager" fetchpriority="high" decoding="async">
+      </picture>
+    </a>
+    {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+{{- end -}}

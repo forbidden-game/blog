@@ -1,0 +1,22 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Archive</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+{{- $posts := .Pages.ByDate.Reverse -}}
+{{- if $posts -}}
+  {{- range $posts.GroupByDate "2006" }}
+  <section class="section">
+    <div class="section__head">
+      <h2>{{ .Key }}</h2>
+      <span class="eyebrow">{{ len .Pages }} posts</span>
+    </div>
+    {{ partial "post-list.html" .Pages }}
+  </section>
+  {{- end }}
+{{- else -}}
+  <p class="eyebrow">No posts yet.</p>
+{{- end -}}
+{{ end }}

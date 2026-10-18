@@ -1,0 +1,21 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Index</p>
+  <h1>{{ .Title | title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+{{- $terms := .Data.Terms.Alphabetical -}}
+{{- if $terms -}}
+<ul class="tag-index">
+  {{- range $terms }}
+  <li>
+    <a href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
+    <span>{{ .Count }}</span>
+  </li>
+  {{- end }}
+</ul>
+{{- else -}}
+<p class="eyebrow">No tags yet.</p>
+{{- end -}}
+{{ end }}

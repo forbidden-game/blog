@@ -1,0 +1,21 @@
+{{- $page := .page -}}
+{{- $photo := .photo -}}
+{{- $img := $page.Resources.GetMatch $photo.src -}}
+{{- if not $img -}}
+  {{- errorf "contact item: image %q not found in %s" $photo.src $page.RelPermalink -}}
+{{- else -}}
+  {{- $alt := $photo.alt | default "Untitled image" -}}
+  {{- if not $photo.alt -}}
+    {{- errorf "contact item: alt text required for %q in %s" $photo.src $page.RelPermalink -}}
+  {{- end -}}
+  {{- $thumb := $img.Fill "640x480 Center q82 webp" -}}
+  {{- $thumbJpg := $img.Fill "640x480 Center q86 jpg" -}}
+
+  <a class="contact-item" href="{{ $page.RelPermalink }}" aria-label="{{ $alt }}">
+    <picture>
+      <source srcset="{{ $thumb.RelPermalink }}" type="image/webp">
+      <img src="{{ $thumbJpg.RelPermalink }}" width="640" height="480" alt="{{ $alt }}" loading="lazy" decoding="async">
+    </picture>
+    {{ with $photo.caption }}<span class="contact-item__caption">{{ . }}</span>{{ end }}
+  </a>
+{{- end -}}

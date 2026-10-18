@@ -1,0 +1,59 @@
+baseURL = "http://localhost:1313/"
+locale = "zh-CN"
+title = "TERN"
+enableRobotsTXT = true
+capitalizeListTitles = false
+pluralizeListTitles = false
+summaryLength = 120
+timeZone = "Asia/Shanghai"
+
+# GitHub Pages serves the built public/ directory as-is.
+# The Actions workflow overrides baseURL with the real Pages URL.
+
+[params]
+  description = "文字、照片与低分辨率的安静角落。"
+  author = "TERN"
+  tagline = "WORDS AND LIGHT"
+  startYear = 2026
+  accent = "#ffcc66"
+  footerNote = "Built with Hugo. Text set in Fusion Pixel."
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+# /rss.xml instead of Hugo's default /index.xml
+[outputFormats.RSS]
+  mediaType = "application/rss+xml"
+  baseName = "rss"
+
+[services]
+  [services.rss]
+    limit = 20
+
+[imaging]
+  resampleFilter = "Lanczos"
+
+[imaging.jpeg]
+  quality = 84
+
+[imaging.webp]
+  quality = 82
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    noClasses = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[permalinks]
+  posts = "/posts/:slug/"

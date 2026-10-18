@@ -1,0 +1,192 @@
+/* Long-form reading column. */
+.prose {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.prose p {
+  margin: 0 0 var(--space-4);
+}
+
+.prose h2 {
+  margin: var(--space-7) 0 var(--space-4);
+  font-size: 36px;
+  line-height: 48px;
+  font-weight: 400;
+}
+
+.prose h3 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.prose a {
+  text-decoration-color: var(--accent);
+}
+
+.prose a:hover {
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.prose strong {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.prose em {
+  font-style: normal;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.prose blockquote {
+  margin: var(--space-6) 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--fg);
+  color: var(--muted);
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-4);
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+}
+
+.prose li::marker {
+  color: var(--accent);
+}
+
+.prose hr {
+  margin: var(--space-6) 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.prose code {
+  padding: 0 4px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.prose pre {
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.prose table {
+  width: 100%;
+  margin: var(--space-5) 0;
+  border-collapse: collapse;
+  font-size: 24px;
+  line-height: 40px;
+}
+
+.prose th,
+.prose td {
+  padding: var(--space-2) 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.prose th {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.prose figure {
+  margin: var(--space-6) 0;
+}
+
+.prose .figure.portrait {
+  max-width: 480px;
+}
+
+/* Images may break out of the 768px measure without breaking the grid. */
+.prose .figure.wide {
+  width: min(960px, calc(100vw - 48px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.prose .figure.bleed {
+  width: min(var(--page), calc(100vw - 48px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 640px) {
+  .prose .figure.wide,
+  .prose .figure.bleed {
+    width: calc(100vw - 32px);
+  }
+}
+
+/* Reading mode: a system sans escape hatch for long texts and low vision.
+   The default reading experience remains the pixel face. */
+html[data-reading="sans"] .prose {
+  max-width: 36em;
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+html[data-reading="sans"] .prose p {
+  margin-bottom: 1em;
+}
+
+html[data-reading="sans"] .prose h2 {
+  margin: 2em 0 0.8em;
+  font-size: 28px;
+  line-height: 1.35;
+}
+
+html[data-reading="sans"] .prose h3 {
+  margin: 1.8em 0 0.6em;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+html[data-reading="sans"] .prose code,
+html[data-reading="sans"] .prose pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+html[data-reading="sans"] .prose table {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+html[data-reading="sans"] .prose th {
+  font-size: 12px;
+  line-height: 1.5;
+}

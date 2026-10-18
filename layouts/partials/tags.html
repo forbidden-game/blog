@@ -1,0 +1,11 @@
+{{- with .Params.tags -}}
+<span class="tag-row">
+  {{- range . -}}
+    {{- with site.GetPage (printf "/tags/%s" .) -}}
+      <a class="tag" href="{{ .RelPermalink }}">#{{ .Title }}</a>
+    {{- else -}}
+      <span class="tag">#{{ . }}</span>
+    {{- end -}}
+  {{- end -}}
+</span>
+{{- end -}}

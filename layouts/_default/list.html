@@ -1,0 +1,16 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Index</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+{{- $pages := .Pages.ByDate.Reverse -}}
+{{- if $pages -}}
+  {{ partial "post-list.html" $pages }}
+{{- else -}}
+  <p class="eyebrow">Nothing here yet.</p>
+{{- end -}}
+{{ end }}

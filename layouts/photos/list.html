@@ -1,0 +1,16 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Contact sheet</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+<div class="contact-grid">
+  {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- range $post := $posts -}}
+    {{- range $post.Params.photos -}}
+      {{ partial "contact-item.html" (dict "page" $post "photo" .) }}
+    {{- end -}}
+  {{- end -}}
+</div>
+{{ end }}

@@ -1,0 +1,18 @@
+{{- $isPosts := or (eq .Section "posts") (eq .Section "tags") -}}
+{{- $isPhotos := eq .Section "photos" -}}
+{{- $isAbout := eq .RelPermalink ("about/" | relURL) -}}
+<header class="site-header">
+  <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }} 首页">
+    <span class="brand__mark" aria-hidden="true"></span>
+    <span>{{ site.Title }}</span>
+  </a>
+
+  <nav class="site-nav" aria-label="主导航">
+    <a href="{{ "posts/" | relURL }}"{{ if $isPosts }} aria-current="page"{{ end }}>Posts</a>
+    <a href="{{ "photos/" | relURL }}"{{ if $isPhotos }} aria-current="page"{{ end }}>Photos</a>
+    <a href="{{ "about/" | relURL }}"{{ if $isAbout }} aria-current="page"{{ end }}>About</a>
+    <a href="{{ "rss.xml" | relURL }}">RSS</a>
+  </nav>
+
+  <button class="reading-toggle" id="reading-toggle" type="button" aria-pressed="false" title="切换到阅读字体">Aa</button>
+</header>
