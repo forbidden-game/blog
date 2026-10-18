@@ -1,4 +1,4 @@
-# TERN
+# eipi10
 
 一个以黑底白字、像素界面、可读正文和照片为核心的静态博客。托管在 GitHub Pages。
 
@@ -105,7 +105,7 @@ Workflow 用 `actions/configure-pages` 获取真实 Pages URL，再传给 Hugo �
 - `static/og-default.png`：没有封面时的默认 OG 图。
 - `static/favicon.svg` / `static/apple-touch-icon.png`：图标。
 
-站点名目前是 **TERN**，是初始占位品牌。改成自己的名字时，至少同步 `hugo.toml` 的 `title`、`params.author` 和 `content/_index.md` 的 `title`。
+站点名是 **eipi10**。改名时，至少同步 `hugo.toml` 的 `title`、`params.author` 和 `content/_index.md` 的 `title`，以及 `static/favicon.svg`、`static/apple-touch-icon.png` 和 `static/og-default.png`。
 
 ## 字号规则
 

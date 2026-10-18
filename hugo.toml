@@ -1,6 +1,6 @@
 baseURL = "http://localhost:1313/"
 locale = "zh-CN"
-title = "TERN"
+title = "eipi10"
 enableRobotsTXT = true
 capitalizeListTitles = false
 pluralizeListTitles = false
@@ -12,7 +12,7 @@ timeZone = "Asia/Shanghai"
 
 [params]
   description = "文字、照片与低分辨率的安静角落。"
-  author = "TERN"
+  author = "eipi10"
   tagline = "WORDS AND LIGHT"
   startYear = 2026
   accent = "#ffcc66"

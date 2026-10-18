@@ -19,7 +19,7 @@
   {{- end -}}
 {{- end -}}
 {{- if not $ogImage -}}
-  {{- $ogImage = "og-default.png" | absURL -}}
+  {{- $ogImage = printf "%s?v=eipi10" ("og-default.png" | absURL) -}}
 {{- end -}}
 
 {{- $font := resources.Get "fonts/fusion-pixel-12px-proportional-zh_hans.woff2" | fingerprint -}}
@@ -40,8 +40,8 @@
 <meta name="theme-color" content="#080808">
 <link rel="canonical" href="{{ .Permalink }}">
 
-<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}?v=eipi10" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}?v=eipi10">
 <link rel="preload" href="{{ $font.RelPermalink }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
