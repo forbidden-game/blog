@@ -126,7 +126,8 @@ button {
 }
 
 .reading-toggle:hover,
-.reading-toggle[aria-pressed="true"] {
+.reading-toggle[aria-pressed="true"],
+html[data-reading="pixel"] .reading-toggle {
   border-color: var(--fg);
   background: var(--fg);
   color: var(--bg);
@@ -307,6 +308,7 @@ main {
 .photo figcaption {
   margin-top: var(--space-2);
   color: var(--muted);
+  font-family: var(--font-pixel);
   font-size: 12px;
   line-height: 20px;
 }
@@ -318,8 +320,10 @@ main {
   cursor: zoom-in;
 }
 
+/* The footer uses 12px text, so an em-based measure would shrink it.
+   Use the explicit pixel-mode text width instead. */
 .post__foot {
-  max-width: var(--measure);
+  max-width: 768px;
   margin: var(--space-7) auto 0;
   padding-top: var(--space-4);
   border-top: 1px solid var(--line);

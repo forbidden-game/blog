@@ -16,7 +16,7 @@ timeZone = "Asia/Shanghai"
   tagline = "WORDS AND LIGHT"
   startYear = 2026
   accent = "#ffcc66"
-  footerNote = "Built with Hugo. Text set in Fusion Pixel."
+  footerNote = "Built with Hugo. Pixel interface, readable prose."
 
 [taxonomies]
   tag = "tags"

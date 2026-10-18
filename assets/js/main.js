@@ -1,8 +1,8 @@
 /*
  * The site has no framework at runtime. This file powers two progressive
- * enhancements: the native <dialog> lightbox and the optional reading mode.
- * Without JavaScript, image links still open the full image and the pixel
- * typography remains the default.
+ * enhancements: the native <dialog> lightbox and the prose font toggle.
+ * Without JavaScript, image links still open the full image and prose keeps
+ * the readable system sans default.
  */
 (() => {
   const dialog = document.getElementById('lightbox');
@@ -81,23 +81,23 @@
   if (toggle) {
     const root = document.documentElement;
     const sync = () => {
-      const enabled = root.dataset.reading === 'sans';
-      toggle.setAttribute('aria-pressed', String(enabled));
-      toggle.title = enabled ? '切换回像素字体' : '切换到阅读字体';
+      const pixel = root.dataset.reading === 'pixel';
+      toggle.setAttribute('aria-pressed', String(pixel));
+      toggle.title = pixel ? '切换到系统阅读字体' : '切换到像素字体';
     };
 
     sync();
 
     toggle.addEventListener('click', () => {
-      const enabled = root.dataset.reading !== 'sans';
-      if (enabled) {
-        root.dataset.reading = 'sans';
+      const pixel = root.dataset.reading !== 'pixel';
+      if (pixel) {
+        root.dataset.reading = 'pixel';
       } else {
         delete root.dataset.reading;
       }
 
       try {
-        localStorage.setItem('reading', enabled ? 'sans' : 'pixel');
+        localStorage.setItem('reading', pixel ? 'pixel' : 'sans');
       } catch {
         // Storage can be unavailable in private contexts; the toggle still
         // works for the current page.

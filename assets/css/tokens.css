@@ -1,9 +1,10 @@
 /*
  * Design tokens.
  *
- * The pixel font is designed on a 12px grid. Type sizes must be integer
- * multiples of 12px so every design pixel maps to whole device pixels at
- * 1x, 2x and 3x. Do not introduce clamp()/vw font sizes or fractional sizes.
+ * The pixel face is designed on a 12px grid. In pixel mode, type sizes must
+ * be integer multiples of 12px so every design pixel maps to whole device
+ * pixels at 1x, 2x and 3x. The default prose face is a system sans at
+ * 18px / 1.9 for sustained reading.
  */
 :root {
   color-scheme: dark;
@@ -17,10 +18,14 @@
 
   --font-pixel: "Fusion Pixel", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "Fusion Pixel Mono", "Fusion Pixel", ui-monospace, monospace;
+  --font-reading: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 
   --text-body: 24px;
   --leading-body: 40px;
+  --text-reading: 18px;
+  --leading-reading: 1.9;
   --measure: 32em;
+  --measure-reading: 36em;
   --page: 1200px;
 
   --space-1: 4px;
