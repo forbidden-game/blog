@@ -13,7 +13,7 @@
         "widths" (slice 768 1200 1600 2000)
         "fallbackWidth" 1600) -}}
 
-  <figure class="post-cover">
+  <figure class="post-cover" data-cms-image="cover" data-cms-src="{{ .src }}" data-cms-alt="{{ $alt }}" data-cms-caption="{{ $caption }}">
     <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
       <picture>
         <source type="image/webp" srcset="{{ $data.srcset }}" sizes="100vw">

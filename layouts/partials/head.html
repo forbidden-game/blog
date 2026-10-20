@@ -14,7 +14,8 @@
 
 {{- $ogImage := "" -}}
 {{- with .Params.cover -}}
-  {{- with $.Resources.GetMatch . -}}
+  {{- $cover := partial "resolve-image.html" (dict "page" $ "src" .) -}}
+  {{- with $cover -}}
     {{- $ogImage = (.Fill "1200x630 Center q82 jpg").Permalink -}}
   {{- end -}}
 {{- end -}}

@@ -3,7 +3,10 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body>
+  <body
+    data-cms-file="{{ with .File }}{{ .Path }}{{ end }}"
+    data-cms-kind="{{ .Kind }}"
+    data-cms-url="{{ .RelPermalink }}">
     <a class="skip-link" href="#main">跳到正文</a>
     {{ partial "header.html" . }}
     <main id="main">
