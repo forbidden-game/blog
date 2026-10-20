@@ -5,30 +5,28 @@
     <p class="eyebrow">
       {{- .Date.Format "2006.01.02" }} · {{ .ReadingTime }} MIN · {{ $kind | upper -}}
     </p>
-    <h1 data-cms-field="title">{{ .Title }}</h1>
-    {{ with .Description }}<p class="post__description" data-cms-field="description">{{ . }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="post__description">{{ . }}</p>{{ end }}
   </header>
 
   {{- if ne $kind "photo" -}}
     {{- with .Params.cover -}}
-      {{- $cover := partial "resolve-image.html" (dict "page" $ "src" .) -}}
-      {{- with $cover -}}
-        {{ partial "cover.html" (dict "page" $ "image" . "alt" $.Params.coverAlt "caption" $.Params.coverCaption "src" $.Params.cover) }}
+      {{- with $.Resources.GetMatch . -}}
+        {{ partial "cover.html" (dict "page" $ "image" . "alt" $.Params.coverAlt "caption" $.Params.coverCaption) }}
       {{- end -}}
     {{- end -}}
   {{- end -}}
 
-  <div class="prose" data-cms-body>
+  <div class="prose">
     {{ .Content }}
   </div>
 
   {{- if eq $kind "photo" -}}
   <div class="photo-grid">
-    {{- range $index, $photo := .Params.photos -}}
+    {{- range .Params.photos -}}
       {{ partial "photo-figure.html" (dict
         "page" $
-        "photo" $photo
-        "index" $index
+        "photo" .
         "sizes" "(max-width: 900px) 100vw, 400px"
         "widths" (slice 480 960)) }}
     {{- end -}}

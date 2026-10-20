@@ -7,7 +7,7 @@ description: "关于这个博客、照片和像素字体。"
 
 白天写代码，晚上带着相机走路。拍下来的东西不一定重要，但它们需要被放在某个地方。这里就是那个地方。
 
-{{< figure src="uploads/about-portrait.jpg" alt="黑色背景上的一张抽象肖像，暖色光落在轮廓边缘" caption="SELF, 2026" sizes="(max-width: 768px) 100vw, 480px" class="portrait" >}}
+{{< figure src="portrait.jpg" alt="黑色背景上的一张抽象肖像，暖色光落在轮廓边缘" caption="SELF, 2026" sizes="(max-width: 768px) 100vw, 480px" class="portrait" >}}
 
 ## 关于这个站
 

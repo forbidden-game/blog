@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: {{ "edit/" | relURL }}
 
 Sitemap: {{ "sitemap.xml" | absURL }}

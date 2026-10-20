@@ -17,7 +17,7 @@
     {{- if eq .Params.kind "photo" -}}
       {{- range .Params.photos -}}
         {{- $photo := . -}}
-        {{- with partial "resolve-image.html" (dict "page" $post "src" $photo.src) -}}
+        {{- with $post.Resources.GetMatch $photo.src -}}
           {{- $img := . -}}
           {{- $resized := $img.Resize "960x q82 webp" -}}
           {{- $caption := "" -}}

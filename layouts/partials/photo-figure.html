@@ -1,7 +1,6 @@
 {{- $page := .page -}}
 {{- $photo := .photo -}}
-{{- $index := .index | default 0 -}}
-{{- $img := partial "resolve-image.html" (dict "page" $page "src" $photo.src) -}}
+{{- $img := $page.Resources.GetMatch $photo.src -}}
 {{- if not $img -}}
   {{- errorf "photo: image %q not found in %s" $photo.src $page.RelPermalink -}}
 {{- else -}}
@@ -15,7 +14,7 @@
   {{- $class := .class | default "photo" -}}
   {{- $data := partial "image-data.html" (dict "image" $img "widths" $widths) -}}
 
-  <figure class="{{ $class }}" data-cms-image="photo" data-cms-index="{{ $index }}" data-cms-src="{{ $photo.src }}" data-cms-alt="{{ $alt }}" data-cms-caption="{{ $caption }}">
+  <figure class="{{ $class }}">
     <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
       <picture>
         <source type="image/webp" srcset="{{ $data.srcset }}" sizes="{{ $sizes }}">

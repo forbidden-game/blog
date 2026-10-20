@@ -2,10 +2,10 @@
 <article class="page">
   <header class="page-head">
     <p class="eyebrow">{{ .Title | upper }}</p>
-    <h1 data-cms-field="title">{{ .Title }}</h1>
-    {{ with .Description }}<p data-cms-field="description">{{ . }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
   </header>
-  <div class="prose" data-cms-body>
+  <div class="prose">
     {{ .Content }}
   </div>
 </article>

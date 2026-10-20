@@ -1,6 +1,6 @@
 {{- $page := .page -}}
 {{- $photo := .photo -}}
-{{- $img := partial "resolve-image.html" (dict "page" $page "src" $photo.src) -}}
+{{- $img := $page.Resources.GetMatch $photo.src -}}
 {{- if not $img -}}
   {{- errorf "contact item: image %q not found in %s" $photo.src $page.RelPermalink -}}
 {{- else -}}

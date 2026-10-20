@@ -1,5 +1,5 @@
 {{- $src := .Get "src" -}}
-{{- $img := partial "resolve-image.html" (dict "page" .Page "src" $src) -}}
+{{- $img := .Page.Resources.GetMatch $src -}}
 {{- if not $img -}}
   {{- errorf "figure: image %q not found in %s" $src .Page.RelPermalink -}}
 {{- else -}}
@@ -22,7 +22,7 @@
   {{- end -}}
   {{- $data := partial "image-data.html" (dict "image" $img) -}}
 
-  <figure class="figure{{ with $class }} {{ . }}{{ end }}" data-cms-figure data-cms-src="{{ $src }}" data-cms-alt="{{ $alt }}" data-cms-caption="{{ $caption }}" data-cms-sizes="{{ $sizes }}" data-cms-class="{{ $class }}">
+  <figure class="figure{{ with $class }} {{ . }}{{ end }}">
     <a href="{{ $data.full.RelPermalink }}" data-lightbox data-alt="{{ $alt }}" data-caption="{{ $caption }}">
       <picture>
         <source type="image/webp" srcset="{{ $data.srcset }}" sizes="{{ $sizes }}">

@@ -3,8 +3,8 @@
 
 <section class="hero">
   <p class="eyebrow">{{ site.Params.tagline }} / {{ now.Year }}</p>
-  <h1 data-cms-field="title">{{ .Title }}</h1>
-  <p class="hero__lede" data-cms-field="description">{{ .Description | default site.Params.description }}</p>
+  <h1>{{ site.Title }}</h1>
+  <p class="hero__lede">{{ site.Params.description }}</p>
   <p class="hero__meta">A personal blog about photographs, text, and the space between them.</p>
 </section>
 
